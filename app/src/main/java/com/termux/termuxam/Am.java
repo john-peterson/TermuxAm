@@ -18,6 +18,10 @@
 
 package com.termux.termuxam;
 
+// import androidx.test.InstrumentationRegistry;
+import androidx.test.platform.app.InstrumentationRegistry;
+import android.content.Context;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
@@ -111,12 +115,20 @@ public class Am extends BaseCommand {
     private int mStackId;
     */
 
+    void abc(){
+        System.out.println("abc");
+        // Intent intent = new Intent(InstrumentationRegistry.getContext(), TestComponentsService.class);
+        Context c = new InstrumentationRegistry.getContext();
+        System.exit(0);
+    }
+
     /**
      * Command-line entry point.
      *
      * @param args The command-line arguments
      */
     public static void main(String[] args) {
+        // abc();
         Integer exitCode = new Am().run(args);
         // If command finished, then exit with exit code, otherwise let command waiting thread to call exit itself.
         if (exitCode != null)
@@ -129,6 +141,7 @@ public class Am extends BaseCommand {
 
     @Override
     public void onShowUsage(PrintStream out) {
+        abc();
         PrintWriter pw = new PrintWriter(out);
         pw.println(
                 "Activity manager (activity) commands provided by the " + FakeContext.PACKAGE_NAME + " app.\n" +
@@ -415,6 +428,7 @@ public class Am extends BaseCommand {
 
     @Override
     public Integer onRun() throws Exception {
+        abc();
         String op = nextArgRequired();
         if (op.equals("-h") || op.equals("--help")) {
             onShowUsage(System.out);
